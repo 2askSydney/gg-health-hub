@@ -7,6 +7,21 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <style>
 <style>
+  <style>
+/* Hides any rogue, un-tagged code strings bleeding onto the page */
+body > text, head, title { display: none !important; }
+
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+
+/* Senior-Friendly Core Defaults */
+body{
+  display: block !important; /* Forces the actual app content to stay visible */
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:#f4f6f4;
+  color:#111111;
+  min-height:100vh;
+  font-size:18px;
+}
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 
 /* Senior-Friendly Core Defaults */
