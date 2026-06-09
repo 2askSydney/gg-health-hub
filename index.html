@@ -162,11 +162,23 @@ body{
   max-height:600px;
   border-top:2px solid #e5e5e0;
 }
-.ex-img-wrap img, .tray-photo, .pill-img {
+/* Keeps images sharp, centered, and senior-friendly without stretching */
+.ex-img-wrap img {
+  width: auto;
+  max-width: 80%;       /* Prevents the image from stretching across the whole iPad screen */
+  max-height: 350px;    /* Caps the height so she doesn't have to scroll forever */
+  margin: 16px auto;    /* Centers the image perfectly and adds breathing room */
+  display: block;
+  border-radius: 12px;  /* Softens the corners of the photo */
+  border: 1px solid #e0e0da; /* Adds a clean frame around the photo */
+  image-rendering: -webkit-optimize-contrast; /* Forces iOS to sharpen the pixels */
+}
+
+/* Keeps medication tray and pill photos looking proportional */
+.tray-photo, .pill-img {
   width: 100%;
   max-width: 100%;
   height: auto;
-  object-fit: contain; /* Keeps the photo from stretching out of proportion */
   display: block;
   image-rendering: -webkit-optimize-contrast;
 }
