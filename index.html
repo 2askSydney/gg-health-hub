@@ -163,10 +163,11 @@ body{
   border-top:2px solid #e5e5e0;
 }
 .ex-img-wrap img, .tray-photo, .pill-img {
-  width:100%;
+  width: 100%;
   max-width: 100%;
   height: auto;
-  display:block;
+  object-fit: contain; /* Keeps the photo from stretching out of proportion */
+  display: block;
   image-rendering: -webkit-optimize-contrast;
 }
 
