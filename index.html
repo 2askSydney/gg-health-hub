@@ -207,10 +207,15 @@ body{
   padding:14px 0;
   border-bottom:2px solid #f0f0ea;
 }
-.pill-img{
-  width:75px;
-  height:75px;
-  border-radius:12px;
+.pill-img {
+  width: 56px;          /* Scaled down slightly so the screenshot doesn't stretch and blur */
+  height: 56px;         /* Keeps it a perfect, clean square */
+  border-radius: 10px;  /* Smooth, neat corners */
+  object-fit: contain;  /* Ensures the pill photo never stretches or distorts */
+  background: #ffffff;  /* Puts a clean white background behind it if it's smaller */
+  border: 1px solid #e0e0da; /* Adds a subtle frame so white pills don't vanish into the card */
+  image-rendering: -webkit-optimize-contrast; /* Sharpens up the photo on her iPad screen */
+  flex-shrink: 0;       /* Prevents the text next to it from crushing the image */
 }
 .med-info strong{
   font-size:20px;
