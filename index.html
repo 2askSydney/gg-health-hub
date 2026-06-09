@@ -175,12 +175,14 @@ body{
 }
 
 /* Keeps medication tray and pill photos looking proportional */
-.tray-photo, .pill-img {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
+width: auto;
+  max-width: 80%;       /* Prevents the tray image from stretching out and blurring */
+  max-height: 350px;    /* Caps the height so it fits cleanly on her iPad screen */
+  margin: 16px auto;    /* Centers the photo perfectly and adds clean spacing */
   display: block;
-  image-rendering: -webkit-optimize-contrast;
+  border-radius: 12px;  /* Smooth, clean corners */
+  border: 1px solid #e0e0da; /* Adds a nice crisp border around the tray photo */
+  image-rendering: -webkit-optimize-contrast; /* Sharpens the image pixels on iOS */
 }
 
 /* Medication Cards */
