@@ -5,56 +5,207 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<title>GG's Daily Health App</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f0f4f0;color:#1a1a1a;min-height:100vh}
-.header{background:#1D9E75;color:#fff;padding:14px 16px 12px;position:sticky;top:0;z-index:10}
-.header h1{font-size:19px;font-weight:600}
-.header p{font-size:12px;color:#9FE1CB;margin-top:2px}
-.nav{display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-bottom:1px solid #e5e5e0;position:sticky;top:57px;z-index:9}
-.nav-btn{padding:10px 4px 8px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;border:none;background:transparent;border-bottom:2px solid transparent}
-.nav-btn svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;color:#888}
-.nav-btn span{font-size:10px;color:#888;font-weight:500}
-.nav-btn.active{border-bottom:2px solid #1D9E75}
-.nav-btn.active svg,.nav-btn.active span{color:#1D9E75}
-.section{display:none;padding:12px 14px 80px}
-.section.active{display:block}
-.prog-card{background:#fff;border-radius:12px;padding:12px 14px;margin-bottom:12px;border:1px solid #e0ede0;display:flex;align-items:center;justify-content:space-between}
-.prog-label{font-size:13px;color:#0F6E56;font-weight:500;margin-bottom:6px}
-.prog-bar{height:7px;background:#C0DD97;border-radius:4px;width:200px;overflow:hidden}
-.prog-fill{height:100%;background:#1D9E75;border-radius:4px;transition:width 0.4s}
-.prog-num{font-size:26px;font-weight:700;color:#1D9E75}
-.ex-card{background:#fff;border-radius:12px;margin-bottom:10px;overflow:hidden;border:1px solid #e0e0da}
-.ex-card.done{opacity:0.6}
-.ex-header{display:flex;align-items:center;gap:10px;padding:11px 12px}
-.ex-check{width:30px;height:30px;border-radius:50%;border:2px solid #1D9E75;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:17px;color:transparent;transition:all 0.15s;line-height:1}
-.ex-check.done{background:#1D9E75;color:#fff}
-.ex-meta{flex:1;min-width:0}
-.ex-meta strong{font-size:14px;font-weight:600;line-height:1.2;display:block}
-.ex-meta .sub{font-size:11px;color:#777;margin-top:1px}
-.ex-reps{background:#E1F5EE;color:#0F6E56;font-size:11px;font-weight:600;padding:3px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0}
-.ex-img-wrap{max-height:0;overflow:hidden;transition:max-height 0.3s ease;border-top:0px solid #eee}
-.ex-img-wrap.open{max-height:500px;border-top:1px solid #f0f0ea}
-.ex-img-wrap img{width:100%;display:block}
-.ex-expand{width:100%;padding:6px;background:transparent;border:none;border-top:1px solid #f0f0ea;font-size:11px;color:#aaa;cursor:pointer;text-align:center}
-.card{background:#fff;border-radius:12px;padding:14px;margin-bottom:10px;border:1px solid #e0e0da}
-.card-title{font-size:14px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:6px}
-.tray-photo{width:100%;border-radius:10px;margin-bottom:12px;display:block}
-.med-section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#888;margin:12px 0 6px;display:flex;align-items:center;gap:6px}
-.med-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid #f2f2ed}
-.med-item:last-child{border-bottom:none}
-.med-check{width:30px;height:30px;border-radius:7px;border:2px solid #378ADD;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:17px;color:transparent;transition:all 0.15s;line-height:1}
-.med-check.done{background:#378ADD;color:#fff}
-.pill-img{width:52px;height:52px;border-radius:8px;object-fit:cover;border:1px solid #eee;flex-shrink:0}
-.med-info strong{font-size:14px;font-weight:600;display:block;line-height:1.2}
-.med-info span{font-size:12px;color:#666}
-.med-done-badge{font-size:20px;color:#1D9E75;flex-shrink:0}
-.bedtime-card{background:#EEF2FF;border:1px solid #c7d2fe;border-radius:12px;padding:12px 14px;margin-bottom:10px}
-.bedtime-card .lbl{font-size:11px;font-weight:700;text-transform:uppercase;color:#6366f1;letter-spacing:.06em;margin-bottom:8px}
-.bedtime-item{display:flex;align-items:center;gap:10px;padding:6px 0}
-.med-check-bed{width:30px;height:30px;border-radius:7px;border:2px solid #6366f1;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:17px;color:transparent;transition:all 0.15s;line-height:1}
-.med-check-bed.done{background:#6366f1;color:#fff}
+
+/* Senior-Friendly Core Defaults */
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:#f4f6f4; /* Slightly brighter contrast */
+  color:#111111;      /* Deep black for readability */
+  min-height:100vh;
+  font-size:18px;     /* Increased baseline font size */
+}
+
+/* Header - Bold and clear */
+.header{
+  background:#116B4E; /* Darker green for higher contrast with white text */
+  color:#fff;
+  padding:20px 24px;  /* Spaced out */
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+.header h1{
+  font-size:28px;     /* Big, clear title */
+  font-weight:700;
+}
+.header p{
+  font-size:16px;     /* Easily readable subtitle */
+  color:#D2F4EB;
+  margin-top:6px;
+}
+
+/* Navigation - Massive iPad Tap Targets */
+.nav{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  background:#fff;
+  border-bottom:3px solid #116B4E;
+  position:sticky;
+  top:85px;
+  z-index:9;
+}
+.nav-btn{
+  padding:18px 8px;   /* Tall buttons that are easy to target */
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  cursor:pointer;
+  border:none;
+  background:transparent;
+}
+.nav-btn svg{
+  width:32px;         /* Upsized icons */
+  height:32px;
+  stroke:currentColor;
+  fill:none;
+  stroke-width:2.2;
+  color:#555;
+}
+.nav-btn span{
+  font-size:16px;     /* Large text labels under icons */
+  color:#444;
+  font-weight:700;
+}
+.nav-btn.active{
+  background-color:#E8F5F1; /* Clear highlight on active tab */
+  border-bottom:4px solid #116B4E;
+}
+.nav-btn.active svg, .nav-btn.active span{
+  color:#116B4E;
+}
+
+/* Sections */
+.section{
+  display:none;
+  padding:20px 20px 100px;
+}
+.section.active{
+  display:block;
+}
+
+/* Giant Checkboxes for Motor Control */
+.ex-check, .med-check, .med-check-bed {
+  width: 48px;        /* Massive touch target (Apple minimum is 44px) */
+  height: 48px;
+  border-radius: 10px;
+  border: 3px solid #116B4E;
+  background: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 28px;    /* Big checkmark */
+  color: transparent;
+  font-weight: bold;
+}
+.ex-check.done, .med-check.done {
+  background: #116B4E;
+  color: #fff;
+}
+
+/* Exercise Cards */
+.ex-card{
+  background:#fff;
+  border-radius:16px;
+  margin-bottom:16px;
+  overflow:hidden;
+  border:2px solid #ccd6cc; /* Thicker borders to define edges */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+.ex-header{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:18px;
+}
+.ex-meta strong{
+  font-size:22px;     /* Easy to read exercise names */
+  font-weight:700;
+  line-height:1.3;
+}
+.ex-meta .sub{
+  font-size:16px;     /* Larger descriptive text */
+  color:#555;
+  margin-top:4px;
+}
+.ex-reps{
+  background:#D1FAE5;
+  color:#065F46;
+  font-size:16px;     /* Up from tiny 11px */
+  font-weight:700;
+  padding:6px 14px;
+  border-radius:20px;
+}
+
+/* Image styling to ensure it's crisp and clear */
+.ex-img-wrap.open{
+  max-height:600px;
+  border-top:2px solid #e5e5e0;
+}
+.ex-img-wrap img, .tray-photo, .pill-img {
+  width:100%;
+  max-width: 100%;
+  height: auto;
+  display:block;
+  image-rendering: -webkit-optimize-contrast; /* Sharpens images on iOS devices */
+}
+
+/* Medication List Sizing */
+.card{
+  background:#fff;
+  border-radius:16px;
+  padding:20px;
+  margin-bottom:16px;
+  border: 2px solid #ccd6cc;
+}
+.card-title{
+  font-size:20px;
+  font-weight:700;
+  margin-bottom:16px;
+}
+.med-section-label{
+  font-size:15px;
+  font-weight:800;
+  color:#444;
+  margin:20px 0 10px;
+}
+.med-item{
+  gap:16px;
+  padding:14px 0;
+  border-bottom:2px solid #f0f0ea;
+}
+.pill-img{
+  width:75px;         /* Made image larger to clearly identify pill shapes */
+  height:75px;
+  border-radius:12px;
+}
+.med-info strong{
+  font-size:20px;
+  font-weight:700;
+}
+.med-info span{
+  font-size:16px;
+  color:#444;
+}
+
+/* Bedtime Adjustments */
+.bedtime-card{
+  background:#EEF2FF;
+  border:2px solid #b4c6fc;
+  border-radius:16px;
+  padding:18px;
+}
+.med-check-bed{
+  border-color: #4F46E5;
+}
+.med-check-bed.done{
+  background: #4F46E5;
+}
+</style>
 .bp-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
 .bp-box{background:#f8f8f4;border-radius:10px;padding:10px 12px}
 .bp-box label{font-size:11px;color:#666;display:block;margin-bottom:4px;font-weight:500}
